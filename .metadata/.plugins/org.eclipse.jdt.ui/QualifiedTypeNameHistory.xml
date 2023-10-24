@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="org.apache.lucene.analysis.standard.StandardAnalyzer"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.analysis.Analyzer"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.analysis.AnalyzerWrapper"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.index.IndexWriterConfig"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.index.IndexWriter"/>
+    <fullyQualifiedTypeName name="java.nio.file.Files"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.util.FileDeleter"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.luke.models.commits.File"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.document.Document"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.document.Field"/>
+    <fullyQualifiedTypeName name="java.nio.file.FileVisitOption"/>
+    <fullyQualifiedTypeName name="org.junit.jupiter.params.shadow.com.univocity.parsers.fixed.FieldAlignment"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.document.Field.Store"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+    <fullyQualifiedTypeName name="java.io.BufferedReader"/>
+    <fullyQualifiedTypeName name="java.io.FileReader"/>
+    <fullyQualifiedTypeName name="java.util.Set"/>
+    <fullyQualifiedTypeName name="java.util.HashSet"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.document.StoredField"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.index.StoredFields"/>
+    <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.index.Term"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.search.FuzzyQuery"/>
+    <fullyQualifiedTypeName name="java.util.Scanner"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.analysis.it.ItalianAnalyzer"/>
+    <fullyQualifiedTypeName name="org.apache.lucene.analysis.core.WhitespaceAnalyzer"/>
+</qualifiedTypeNameHistroy>

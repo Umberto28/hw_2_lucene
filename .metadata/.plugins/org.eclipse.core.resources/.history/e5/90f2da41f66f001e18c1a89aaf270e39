@@ -1,0 +1,14 @@
+package lucenex;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class SamplesTest {
+
+	@Test
+	void test() {
+		fail("Not yet implemented");
+	}
+
+}

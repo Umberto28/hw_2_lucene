@@ -1,0 +1,240 @@
+package lucenex;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.nio.file.FileVisitOption;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Scanner;
+import java.util.Set;
+
+import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.CharArraySet;
+import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.core.WhitespaceAnalyzer;
+import org.apache.lucene.analysis.it.ItalianAnalyzer;
+import org.apache.lucene.analysis.miscellaneous.PerFieldAnalyzerWrapper;
+import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.codecs.Codec;
+import org.apache.lucene.codecs.simpletext.SimpleTextCodec;
+import org.apache.lucene.document.Document;
+import org.apache.lucene.document.Field;
+import org.apache.lucene.document.StoredField;
+import org.apache.lucene.document.StringField;
+import org.apache.lucene.document.TextField;
+import org.apache.lucene.index.DirectoryReader;
+import org.apache.lucene.index.FieldInfos;
+import org.apache.lucene.index.IndexReader;
+import org.apache.lucene.index.IndexWriter;
+import org.apache.lucene.index.IndexWriterConfig;
+import org.apache.lucene.index.StoredFields;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.queryparser.classic.MultiFieldQueryParser;
+import org.apache.lucene.queryparser.classic.ParseException;
+import org.apache.lucene.queryparser.classic.QueryParser;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Explanation;
+import org.apache.lucene.search.IndexSearcher;
+import org.apache.lucene.search.MatchAllDocsQuery;
+import org.apache.lucene.search.PhraseQuery;
+import org.apache.lucene.search.Query;
+import org.apache.lucene.search.ScoreDoc;
+import org.apache.lucene.search.TermQuery;
+import org.apache.lucene.search.TopDocs;
+import org.apache.lucene.search.similarities.BM25Similarity;
+import org.apache.lucene.search.similarities.ClassicSimilarity;
+import org.apache.lucene.search.similarities.LMJelinekMercerSimilarity;
+import org.apache.lucene.search.similarities.Similarity;
+import org.apache.lucene.store.Directory;
+import org.apache.lucene.store.FSDirectory;
+import org.apache.lucene.tests.analysis.TokenStreamToDot;
+import org.apache.lucene.util.FileDeleter;
+import org.junit.Test;
+
+public class LuceneTest {
+	
+	private Document createDocument(String path) throws IOException {
+		
+		BufferedReader reader = new BufferedReader(new FileReader(path));
+		
+		String title = reader.readLine();
+		
+		StringBuilder content = new StringBuilder();
+		String line;
+        while ((line = reader.readLine()) != null) {
+                content.append(line).append("\n");
+        }
+		
+		Document result = new Document();
+		result.add(new TextField("titolo", title, Field.Store.YES));
+		result.add(new TextField("contenuto", content.toString(), Field.Store.YES));
+		
+		reader.close();		
+		return result;
+	}
+	
+	private void indexDocs(Directory directory, Codec codec) throws IOException {
+		
+		Analyzer defaultAnalyzer = new StandardAnalyzer();
+		CharArraySet stopwords = new CharArraySet(Arrays.asList("il", "i", "del", ":", "di", ",", "la", "nei", "e", "della", ".", "l'"), true);
+		Map<String, Analyzer> perFieldAnalyzers = new HashMap<>();
+		perFieldAnalyzers.put("titolo", new StandardAnalyzer(stopwords));
+		perFieldAnalyzers.put("contenuto", new StandardAnalyzer(stopwords));
+		Analyzer analyzer = new PerFieldAnalyzerWrapper(defaultAnalyzer, perFieldAnalyzers);
+		
+		IndexWriterConfig config = new IndexWriterConfig(analyzer);
+		if(codec != null) {
+			config.setCodec(codec);
+		}
+		IndexWriter writer = new IndexWriter(directory, config);
+		writer.deleteAll();
+		long startTime = System.currentTimeMillis();
+		
+		Document doc1 = this.createDocument("..\\esempiTesti\\file1.txt");
+		Document doc2 = this.createDocument("..\\esempiTesti\\file2.txt");
+		Document doc3 = this.createDocument("..\\esempiTesti\\file3.txt");
+		
+		writer.addDocument(doc1);
+	    writer.addDocument(doc2);
+	    writer.addDocument(doc3);
+	    
+	    long endTime = System.currentTimeMillis();
+	    
+	    long indexingTime = endTime - startTime;
+	    System.out.println("Indexing time: " + indexingTime + " milliseconds");
+
+	    writer.commit();
+	    writer.close();
+		
+	}
+	
+	private void runQuery(IndexSearcher searcher, Query query) throws IOException {
+        runQuery(searcher, query, false);
+    }
+
+    private void runQuery(IndexSearcher searcher, Query query, boolean explain) throws IOException {
+        TopDocs hits = searcher.search(query, 10);
+        System.out.println(hits.scoreDocs.length + " documenti:");
+        StoredFields storedFields = searcher.storedFields();
+        for (int i = 0; i < hits.scoreDocs.length; i++) {
+            ScoreDoc scoreDoc = hits.scoreDocs[i];
+            Document doc = storedFields.document(scoreDoc.doc);
+            System.out.println("doc"+scoreDoc.doc + ":"+ doc.get("titolo") + " (" + scoreDoc.score +")");
+            if (explain) {
+                Explanation explanation = searcher.explain(query, scoreDoc.doc);
+                System.out.println(explanation);
+            }
+        }
+    }
+	
+	@Test
+    public void testIndexingAndSearchTQ() throws IOException {
+        Path path = Paths.get("target/idx0");
+        System.out.print("\nTERM QUERY PER TITOLO!\n");
+
+        Query query = new TermQuery(new Term("titolo", "piante"));
+
+        try (Directory directory = FSDirectory.open(path)) {
+            indexDocs(directory, null);
+            try (IndexReader reader = DirectoryReader.open(directory)) {
+                IndexSearcher searcher = new IndexSearcher(reader);
+                runQuery(searcher, query);
+            } finally {
+                directory.close();
+            }
+        }
+    }
+	
+	@Test
+    public void testIndexingAndSearchPQ() throws IOException {
+        Path path = Paths.get("target/idx1");
+        System.out.print("\nPHRASE QUERY PER CONTENUTO!\n");
+
+        PhraseQuery query = new PhraseQuery.Builder()
+                .add(new Term("contenuto", "mondo"))
+                .build();
+
+        try (Directory directory = FSDirectory.open(path)) {
+            indexDocs(directory, new SimpleTextCodec());
+            try (IndexReader reader = DirectoryReader.open(directory)) {
+                IndexSearcher searcher = new IndexSearcher(reader);
+                runQuery(searcher, query);
+            } finally {
+                directory.close();
+            }
+
+        }
+    }
+
+    @Test
+    public void testIndexingAndSearchPQWithSlop() throws IOException {
+        Path path = Paths.get("target/idx2");
+        System.out.print("\nPHRASE QUERY PER CONTENUTO CON SLOP!\n");
+
+        PhraseQuery query = new PhraseQuery(10, "contenuto", "viaggio", "mondo");
+
+        try (Directory directory = FSDirectory.open(path)) {
+            indexDocs(directory, null);
+            try (IndexReader reader = DirectoryReader.open(directory)) {
+                IndexSearcher searcher = new IndexSearcher(reader);
+                runQuery(searcher, query);
+            } finally {
+                directory.close();
+            }
+        }
+    }
+    
+    @Test
+    public void testIndexingAndSearchAllWithCodec() throws IOException {
+        Path path = Paths.get("target/idx3");
+        System.out.print("\nQUERY PER TUTTI I DOCUMENTI!\n");
+
+        Query query = new MatchAllDocsQuery();
+
+        try (Directory directory = FSDirectory.open(path)) {
+            indexDocs(directory, new SimpleTextCodec());
+            try (IndexReader reader = DirectoryReader.open(directory)) {
+                IndexSearcher searcher = new IndexSearcher(reader);
+                runQuery(searcher, query);
+            } finally {
+                directory.close();
+            }
+
+        }
+    }
+    
+    @Test
+    public void testIndexingAndSearchPQWithInput() throws Exception {
+        Path path = Paths.get("target/idx2");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("\nQUERY DA CONSOLE!\n");
+        
+        System.out.print("Fai una ricerca: ");
+        String queryString = scanner.nextLine();
+        
+        QueryParser parser = new MultiFieldQueryParser(new String[] {"titolo", "contenuto"}, new WhitespaceAnalyzer());
+        Query query = parser.parse(queryString);
+        
+        scanner.close();
+        try (Directory directory = FSDirectory.open(path)) {
+            indexDocs(directory, null);
+            try (IndexReader reader = DirectoryReader.open(directory)) {
+                IndexSearcher searcher = new IndexSearcher(reader);
+                runQuery(searcher, query);
+            } finally {
+                directory.close();
+            }
+        }
+    }
+}

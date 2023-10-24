@@ -1,0 +1,432 @@
+cfs entry for: _10.fld
+doc 0
+  field 0
+    name titolo
+    type string
+    value Esplorando il Mondo delle Piante Tropicali
+  field 1
+    name contenuto
+    type string
+    value Scopri la diversitÃ  della flora tropicale, dalle vibranti orchidee ai rigogliosi giardini di bambÃ¹. Un viaggio nel mondo delle piante tropicali, ricco di colori e profumi esotici.\
+
+doc 1
+  field 0
+    name titolo
+    type string
+    value Natura in Fiore: Alla Scoperta delle Piante Esotiche
+  field 1
+    name contenuto
+    type string
+    value Esplora la bellezza delle piante esotiche provenienti da tutto il mondo. Dai cactus del deserto alle piante acquatiche tropicali, immergiti in un mondo floreale unico e affascinante.\
+\
+
+doc 2
+  field 0
+    name titolo
+    type string
+    value Flora da Ogni Angolo del Globo
+  field 1
+    name contenuto
+    type string
+    value Scopri la ricchezza della biodiversitÃ  tropicale attraverso le varie piante provenienti da ogni angolo del globo. Un viaggio emozionante tra le specie botaniche piÃ¹ affascinanti del mondo tropicale.\
+
+END
+checksum 00000000003418840267
+cfs entry for: _10.inf
+number of fields 2
+  name titolo
+  number 0
+  index options DOCS_AND_FREQS_AND_POSITIONS
+  term vectors false
+  payloads false
+  norms true
+  doc values NONE
+  doc values gen -1
+  attributes 0
+  data dimensional count 0
+  index dimensional count 0
+  dimensional num bytes 0
+  vector number of dimensions 0
+  vector encoding FLOAT32
+  vector similarity EUCLIDEAN
+  soft-deletes false
+  name contenuto
+  number 1
+  index options DOCS_AND_FREQS_AND_POSITIONS
+  term vectors false
+  payloads false
+  norms true
+  doc values NONE
+  doc values gen -1
+  attributes 0
+  data dimensional count 0
+  index dimensional count 0
+  dimensional num bytes 0
+  vector number of dimensions 0
+  vector encoding FLOAT32
+  vector similarity EUCLIDEAN
+  soft-deletes false
+checksum 00000000001012915120
+cfs entry for: _10.len
+field titolo
+  type NUMERIC
+  minvalue 5
+  pattern 0
+0
+T
+3
+T
+0
+T
+field contenuto
+  type NUMERIC
+  minvalue 22
+  pattern 0
+0
+T
+1
+T
+2
+T
+END
+checksum 00000000003624226502
+cfs entry for: _10.pst
+field contenuto
+  term acquatiche
+    doc 1
+      freq 1
+      pos 17
+  term affascinante
+    doc 1
+      freq 1
+      pos 26
+  term affascinanti
+    doc 2
+      freq 1
+      pos 24
+  term ai
+    doc 0
+      freq 1
+      pos 9
+  term alle
+    doc 1
+      freq 1
+      pos 15
+  term angolo
+    doc 2
+      freq 1
+      pos 13
+  term attraverso
+    doc 2
+      freq 1
+      pos 6
+  term bambã
+    doc 0
+      freq 1
+      pos 13
+  term bellezza
+    doc 1
+      freq 1
+      pos 2
+  term biodiversitã
+    doc 2
+      freq 1
+      pos 4
+  term botaniche
+    doc 2
+      freq 1
+      pos 22
+  term cactus
+    doc 1
+      freq 1
+      pos 12
+  term colori
+    doc 0
+      freq 1
+      pos 23
+  term da
+    doc 1
+      freq 1
+      pos 7
+    doc 2
+      freq 1
+      pos 11
+  term dai
+    doc 1
+      freq 1
+      pos 11
+  term dalle
+    doc 0
+      freq 1
+      pos 6
+  term delle
+    doc 0
+      freq 1
+      pos 18
+    doc 1
+      freq 1
+      pos 3
+  term deserto
+    doc 1
+      freq 1
+      pos 14
+  term diversitã
+    doc 0
+      freq 1
+      pos 2
+  term emozionante
+    doc 2
+      freq 1
+      pos 18
+  term esotiche
+    doc 1
+      freq 1
+      pos 5
+  term esotici
+    doc 0
+      freq 1
+      pos 26
+  term esplora
+    doc 1
+      freq 1
+      pos 0
+  term flora
+    doc 0
+      freq 1
+      pos 4
+  term floreale
+    doc 1
+      freq 1
+      pos 23
+  term giardini
+    doc 0
+      freq 1
+      pos 11
+  term globo
+    doc 2
+      freq 1
+      pos 15
+  term immergiti
+    doc 1
+      freq 1
+      pos 19
+  term in
+    doc 1
+      freq 1
+      pos 20
+  term le
+    doc 2
+      freq 2
+      pos 7
+      pos 20
+  term mondo
+    doc 0
+      freq 1
+      pos 17
+    doc 1
+      freq 2
+      pos 10
+      pos 22
+    doc 2
+      freq 1
+      pos 26
+  term nel
+    doc 0
+      freq 1
+      pos 16
+  term ogni
+    doc 2
+      freq 1
+      pos 12
+  term orchidee
+    doc 0
+      freq 1
+      pos 8
+  term piante
+    doc 0
+      freq 1
+      pos 19
+    doc 1
+      freq 2
+      pos 4
+      pos 16
+    doc 2
+      freq 1
+      pos 9
+  term piã
+    doc 2
+      freq 1
+      pos 23
+  term profumi
+    doc 0
+      freq 1
+      pos 25
+  term provenienti
+    doc 1
+      freq 1
+      pos 6
+    doc 2
+      freq 1
+      pos 10
+  term ricchezza
+    doc 2
+      freq 1
+      pos 2
+  term ricco
+    doc 0
+      freq 1
+      pos 21
+  term rigogliosi
+    doc 0
+      freq 1
+      pos 10
+  term scopri
+    doc 0
+      freq 1
+      pos 0
+    doc 2
+      freq 1
+      pos 0
+  term specie
+    doc 2
+      freq 1
+      pos 21
+  term tra
+    doc 2
+      freq 1
+      pos 19
+  term tropicale
+    doc 0
+      freq 1
+      pos 5
+    doc 2
+      freq 2
+      pos 5
+      pos 27
+  term tropicali
+    doc 0
+      freq 1
+      pos 20
+    doc 1
+      freq 1
+      pos 18
+  term tutto
+    doc 1
+      freq 1
+      pos 8
+  term un
+    doc 0
+      freq 1
+      pos 14
+    doc 1
+      freq 1
+      pos 21
+    doc 2
+      freq 1
+      pos 16
+  term unico
+    doc 1
+      freq 1
+      pos 24
+  term varie
+    doc 2
+      freq 1
+      pos 8
+  term viaggio
+    doc 0
+      freq 1
+      pos 15
+    doc 2
+      freq 1
+      pos 17
+  term vibranti
+    doc 0
+      freq 1
+      pos 7
+field titolo
+  term alla
+    doc 1
+      freq 1
+      pos 3
+  term angolo
+    doc 2
+      freq 1
+      pos 3
+  term da
+    doc 2
+      freq 1
+      pos 1
+  term delle
+    doc 0
+      freq 1
+      pos 3
+    doc 1
+      freq 1
+      pos 5
+  term esotiche
+    doc 1
+      freq 1
+      pos 7
+  term esplorando
+    doc 0
+      freq 1
+      pos 0
+  term fiore
+    doc 1
+      freq 1
+      pos 2
+  term flora
+    doc 2
+      freq 1
+      pos 0
+  term globo
+    doc 2
+      freq 1
+      pos 5
+  term in
+    doc 1
+      freq 1
+      pos 1
+  term mondo
+    doc 0
+      freq 1
+      pos 2
+  term natura
+    doc 1
+      freq 1
+      pos 0
+  term ogni
+    doc 2
+      freq 1
+      pos 2
+  term piante
+    doc 0
+      freq 1
+      pos 4
+    doc 1
+      freq 1
+      pos 6
+  term scoperta
+    doc 1
+      freq 1
+      pos 4
+  term tropicali
+    doc 0
+      freq 1
+      pos 5
+END
+checksum 00000000001311337359
+table of contents, size: 4
+  filename: _10.fld
+    start: 23
+    end: 1105
+  filename: _10.inf
+    start: 1128
+    end: 1908
+  filename: _10.len
+    start: 1931
+    end: 2099
+  filename: _10.pst
+    start: 2122
+    end: 6162
+table of contents begins at offset: 0000000000000006162
